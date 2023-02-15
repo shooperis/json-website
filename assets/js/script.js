@@ -1,4 +1,4 @@
-const actualPage = window.location.pathname;
+const actualPage = '/' + location.pathname.split('/').pop();
 let actualPageName;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -36,7 +36,7 @@ function printError(text) {
   return errorElement;
 }
 
-async function navigation(navigationArray) {
+function navigation(navigationArray) {
   navigationElement = document.createElement('nav');
   navigationElement.classList.add('navbar', 'navbar-expand-lg', 'navbar-light');
   navigationElement.id = 'mainNav';
