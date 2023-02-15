@@ -39,10 +39,10 @@ function renderPostData(post) {
   setHeadingTitle([postTitle, postSubTitle, postMeta], 'post-heading');
 
   const postElementWrapper = document.createElement('article');
-  postElementWrapper.classList.add('mb-4');
+  postElementWrapper.classList.add('container-fluid', 'mb-4');
 
   const postElementRow = document.createElement('div');
-  postElementRow.classList.add('row', 'gx-4', 'gx-lg-5', 'justify-content-center');
+  postElementRow.classList.add('row', 'justify-content-center');
   postElementWrapper.append(postElementRow);
 
   const postElementCol = document.createElement('div');

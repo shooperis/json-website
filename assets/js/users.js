@@ -13,10 +13,10 @@ async function init() {
 
 function getAllUsers(users) {
   const mainElementWrapper = document.createElement('main');
-  mainElementWrapper.classList.add('mb-4');
+  mainElementWrapper.classList.add('container-fluid', 'mb-4');
 
   const mainElementRow = document.createElement('div');
-  mainElementRow.classList.add('row', 'gx-4', 'gx-lg-5', 'justify-content-center');
+  mainElementRow.classList.add('row', 'justify-content-center');
   mainElementWrapper.append(mainElementRow);
 
   const mainElementCol = document.createElement('div');

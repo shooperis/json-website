@@ -34,7 +34,7 @@ function getAllPosts(posts, showAuthor) {
   postsContainer.classList.add('container', 'px-4', 'px-lg-5');
 
   const postsRow = document.createElement('div');
-  postsRow.classList.add('row', 'gx-4', 'gx-lg-5', 'justify-content-center');
+  postsRow.classList.add('row', 'justify-content-center');
   postsContainer.append(postsRow);
 
   const postsCol = document.createElement('div');
