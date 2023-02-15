@@ -81,7 +81,7 @@ async function navigation(navigationArray) {
   });
 }
 
-function header() {
+function header(actualPage, actualPageName) {
   const pagePath = actualPage.split('/').pop().replace('.html', '');
 
   headerElement = document.createElement('header');
@@ -137,6 +137,6 @@ navigation([
   {name: 'Albums', path: '/albums.html'}
 ]);
 
-header();
+header(actualPage, actualPageName);
 
 footer();
