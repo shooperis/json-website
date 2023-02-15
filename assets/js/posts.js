@@ -19,7 +19,10 @@ async function init() {
   }
 
   if (parameterUserId) {
-    pageContent.append(getAuthorName(userData));
+    const titleElement = document.createElement('h1');
+    titleElement.textContent = `'${userData.name}' all posts`;
+    setHeadingTitle([titleElement]);
+
     pageContent.append(getAllPosts(posts, false));
   } else {
     pageContent.append(getAllPosts(posts, true));
@@ -27,39 +30,55 @@ async function init() {
 }
 
 function getAllPosts(posts, showAuthor) {
-  const postsList = document.createElement('ul');
-  postsList.classList.add('posts-list', 'data-list');
+  const postsContainer = document.createElement('div');
+  postsContainer.classList.add('container', 'px-4', 'px-lg-5');
+
+  const postsRow = document.createElement('div');
+  postsRow.classList.add('row', 'gx-4', 'gx-lg-5', 'justify-content-center');
+  postsContainer.append(postsRow);
+
+  const postsCol = document.createElement('div');
+  postsCol.classList.add('col-md-10', 'col-lg-8', 'col-xl-7');
+  postsRow.append(postsCol);
 
   posts.map(post => {
-    const postItem = document.createElement('li');
-    postItem.classList.add('post-item');
+    const postItem = document.createElement('div');
+    postItem.classList.add('post-preview');
     
     const postLink = document.createElement('a');
-    postLink.textContent = post.title;
     postLink.href = './post.html?id=' + post.id;
+    postItem.append(postLink);
+
+    const postTitle = document.createElement('h2');
+    postTitle.classList.add('post-title');
+    postTitle.textContent = post.title;
+    postLink.append(postTitle);
+
+    const postSubTitle = document.createElement('h3');
+    postSubTitle.classList.add('post-subtitle');
+    postSubTitle.textContent = post.body.substring(0, 50);
+    postLink.append(postSubTitle);
 
     if (showAuthor) {
+      const postMeta = document.createElement('p');
+      postMeta.classList.add('post-meta');
+      postMeta.textContent = 'Posted by ';
+      postItem.append(postMeta);
+
       const postAuthor = document.createElement('a');
       postAuthor.textContent = `${post.user.name}`;
       postAuthor.href = './user.html?id=' + post.user.id;
-
-      postItem.append(postLink, ' - ', postAuthor);
-    } else {
-      postItem.append(postLink);
+      postMeta.append(postAuthor);
     }
 
-    postsList.append(postItem);
+    const postDivider = document.createElement('hr');
+    postDivider.classList.add('my-4');
+    postItem.append(postDivider);
+
+    postsCol.append(postItem);
   })
 
-  return postsList;
-}
-
-function getAuthorName(user) {
-  const headingElement = document.createElement('h1');
-  headingElement.classList.add('title');
-  headingElement.textContent = `'${user.name}' all posts`;
-
-  return headingElement;
+  return postsContainer;
 }
 
 init();

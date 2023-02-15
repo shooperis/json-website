@@ -18,8 +18,11 @@ async function init() {
     return;
   }
 
+  const titleElement = document.createElement('h1');
+  titleElement.textContent = albumData.title;
+  setHeadingTitle([titleElement]);
+
   pageContent.append(renderAlbumData(albumData));
-  pageContent.append(renderAlbumPhotos(albumData.photos));
 
   const lightbox = new PhotoSwipeLightbox({
     gallery: '.photo-gallery',
@@ -30,10 +33,22 @@ async function init() {
 }
 
 function renderAlbumData(album) {
+  const mainElementWrapper = document.createElement('main');
+  mainElementWrapper.classList.add('mb-4');
+
+  const mainElementRow = document.createElement('div');
+  mainElementRow.classList.add('row', 'gx-4', 'gx-lg-5', 'justify-content-center');
+  mainElementWrapper.append(mainElementRow);
+
+  const mainElementCol = document.createElement('div');
+  mainElementCol.classList.add('col-md-10', 'col-lg-8', 'col-xl-7');
+  mainElementRow.append(mainElementCol);
+
   const albumElement = document.createElement('div');
   albumElement.classList.add('album-data');
+  mainElementCol.append(albumElement);
 
-  const albumHeadingElement = document.createElement('h1');
+  const albumHeadingElement = document.createElement('h2');
   albumHeadingElement.classList.add('title');
   albumHeadingElement.textContent = album.title;
   albumElement.append(albumHeadingElement);
@@ -48,7 +63,9 @@ function renderAlbumData(album) {
   albumAuthorElement.href = './user.html?id=' + album.user.id;
   albumAuthorWrapperElement.append(albumAuthorElement);
 
-  return albumElement;
+  mainElementCol.append(renderAlbumPhotos(album.photos));
+
+  return mainElementWrapper;
 }
 
 function renderAlbumPhotos(photos) {

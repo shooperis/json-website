@@ -12,8 +12,20 @@ async function init() {
 }
 
 function getAllUsers(users) {
+  const mainElementWrapper = document.createElement('main');
+  mainElementWrapper.classList.add('mb-4');
+
+  const mainElementRow = document.createElement('div');
+  mainElementRow.classList.add('row', 'gx-4', 'gx-lg-5', 'justify-content-center');
+  mainElementWrapper.append(mainElementRow);
+
+  const mainElementCol = document.createElement('div');
+  mainElementCol.classList.add('col-md-10', 'col-lg-8', 'col-xl-7');
+  mainElementRow.append(mainElementCol);
+
   const usersList = document.createElement('ul');
   usersList.classList.add('users-list', 'data-list');
+  mainElementCol.append(usersList);
 
   users.forEach(user => {
     const userItem = document.createElement('li');
@@ -23,7 +35,7 @@ function getAllUsers(users) {
     usersList.append(userItem);
   })
 
-  return usersList;
+  return mainElementWrapper;
 }
 
 init();
