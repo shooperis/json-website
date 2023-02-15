@@ -36,7 +36,7 @@ function printError(text) {
   return errorElement;
 }
 
-function navigation(navigationArray) {
+async function navigation(navigationArray) {
   navigationElement = document.createElement('nav');
   navigationElement.classList.add('navbar', 'navbar-expand-lg', 'navbar-light');
   navigationElement.id = 'mainNav';
@@ -92,7 +92,7 @@ function header() {
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         <div class="site-heading">
-          <h1>${actualPageName}</h1>
+          <h1>${actualPageName ? actualPageName : ''}</h1>
         </div>
       </div>
     </div>
