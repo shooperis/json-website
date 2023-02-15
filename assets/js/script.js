@@ -86,7 +86,7 @@ function header(actualPage, actualPageName) {
 
   headerElement = document.createElement('header');
   headerElement.classList.add('masthead');
-  headerElement.style.backgroundImage = `url('../assets/images/${pagePath}.jpg')`;
+  headerElement.style.backgroundImage = `url('./assets/images/${pagePath}.jpg')`;
   headerElement.innerHTML = `
     <div class="container position-relative px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
