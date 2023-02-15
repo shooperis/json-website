@@ -1,0 +1,17 @@
+.main-header {
+  .navigation {
+    .menu-item {
+      .menu-link {
+        &.active {
+          color: green;
+        }
+      }
+    }
+  }
+}
+
+#page-content {
+  .error {
+    color: red;
+  }
+}
