@@ -1,17 +1,32 @@
 async function init() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts?_expand=user&_limit=15');
-  const posts = await res.json();
+  const pageContent = document.querySelector('#page-content');
+  const parameterUserId = getParameter('user_id');
+  let userData;
+  let posts;
+
+  if (parameterUserId) {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${parameterUserId}?_embed=posts`);
+    userData = await res.json();
+    posts = userData.posts;
+  } else {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts?_expand=user&_limit=15');
+    posts = await res.json();
+  }
 
   if (posts.length == 0) {
     pageContent.append(printError('Error: No posts found.'));
     return;
   }
 
-  const pageContent = document.querySelector('#page-content');
-  pageContent.append(getAllPosts(posts));
+  if (parameterUserId) {
+    pageContent.append(getAuthorName(userData));
+    pageContent.append(getAllPosts(posts, false));
+  } else {
+    pageContent.append(getAllPosts(posts, true));
+  }
 }
 
-function getAllPosts(posts) {
+function getAllPosts(posts, showAuthor) {
   const postsList = document.createElement('ul');
   postsList.classList.add('posts-list', 'data-list');
 
@@ -23,16 +38,28 @@ function getAllPosts(posts) {
     postLink.textContent = post.title;
     postLink.href = './post.html?id=' + post.id;
 
-    const postAuthor = document.createElement('a');
-    postAuthor.textContent = `${post.user.name}`;
-    postAuthor.href = './user.html?id=' + post.user.id;
+    if (showAuthor) {
+      const postAuthor = document.createElement('a');
+      postAuthor.textContent = `${post.user.name}`;
+      postAuthor.href = './user.html?id=' + post.user.id;
 
-    postItem.append(postLink, ' - ', postAuthor);
+      postItem.append(postLink, ' - ', postAuthor);
+    } else {
+      postItem.append(postLink);
+    }
 
     postsList.append(postItem);
   })
 
   return postsList;
+}
+
+function getAuthorName(user) {
+  const headingElement = document.createElement('h1');
+  headingElement.classList.add('title');
+  headingElement.textContent = `'${user.name}' all posts`;
+
+  return headingElement;
 }
 
 init();

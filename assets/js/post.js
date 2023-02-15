@@ -56,14 +56,14 @@ function renderPostComments(comments) {
   postCommentsHeadingElement.textContent = 'Comments';
   postCommentsElement.append(postCommentsHeadingElement);
 
-  const postCommentsListElement = document.createElement('ul');
+  const postCommentsListElement = document.createElement('div');
   postCommentsListElement.classList.add('comments-list');
   postCommentsElement.append(postCommentsListElement);
 
   comments.forEach(comment => {
-    const postCommentItemElement = document.createElement('li');
+    const postCommentItemElement = document.createElement('div');
     postCommentItemElement.classList.add('comment-item');
-    postCommentsElement.append(postCommentItemElement);
+    postCommentsListElement.append(postCommentItemElement);
 
     const postCommentNameElement = document.createElement('h3');
     postCommentNameElement.classList.add('name');
@@ -92,7 +92,7 @@ function renderOtherPost(user) {
 
   const otherPostsLinkElement = document.createElement('a');
   otherPostsLinkElement.textContent = 'Click Here';
-  otherPostsLinkElement.href = './posts.html?user=' + user.id;
+  otherPostsLinkElement.href = './posts.html?user_id=' + user.id;
   otherPostsElement.append(otherPostsLinkElement);
 
   return otherPostsElement;
