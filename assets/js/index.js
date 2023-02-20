@@ -30,7 +30,7 @@ async function init() {
                                 </div>
                               </div>
                               <hr class="mt-2 mb-3">
-                              <div class="card mb-4">
+                              <div class="card mb-5">
                                 <div class="card-body p-0">
                                     <div class="row g-0">
                                         <div class="col-lg-6 p-5">
