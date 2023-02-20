@@ -59,7 +59,7 @@ function navigation(navigationArray) {
   navContainerElement.append(navCollapseElement);
 
   navbarElement = document.createElement('ul');
-  navbarElement.classList.add('navbar-nav', 'ms-auto', 'py-4', 'py-lg-0');
+  navbarElement.classList.add('navbar-nav', 'mx-auto', 'py-4', 'py-lg-0');
   navCollapseElement.append(navbarElement);
 
   navigationArray.forEach(element => {
@@ -79,10 +79,18 @@ function navigation(navigationArray) {
     menuLinkElement.textContent = element.name;
     menuItemElement.append(menuLinkElement);
   });
+
+  searchFormElement = document.createElement('form');
+  searchFormElement.classList.add('d-flex');
+  searchFormElement.setAttribute('action', './search.html');
+  navCollapseElement.append(searchFormElement);
+  searchFormElement.innerHTML = `<input class="form-control form-control-sm me-2" name="keywords" type="search" placeholder="Search" aria-label="Search">
+                                  <button class="btn btn-sm btn-success" type="submit">Search</button>`;
 }
 
 function header(actualPage, actualPageName) {
   const pagePath = actualPage.split('/').pop().replace('.html', '');
+  const pageTitle = document.querySelector('title').textContent;
 
   headerElement = document.createElement('header');
   headerElement.classList.add('masthead');
@@ -92,7 +100,7 @@ function header(actualPage, actualPageName) {
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         <div class="site-heading">
-          <h1>${actualPageName ? actualPageName : ''}</h1>
+          <h1>${actualPageName ? actualPageName : pageTitle}</h1>
         </div>
       </div>
     </div>
